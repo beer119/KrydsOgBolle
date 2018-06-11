@@ -8,7 +8,12 @@
 
 #include <iostream>
 #include <cstdlib>
+#include "SoundManager.h"
+#include <thread>
 using namespace std;
+
+
+
 
 void printBoard(int board[3][3])
 {
@@ -69,6 +74,17 @@ void winning(int board[3][3], int player, string name)
 
 }
 int main() {
+	if( SDL_Init(SDL_INIT_EVERYTHING) < 0 )
+	    {
+	        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+	        exit(0);
+	    }
+	string pathSFX="assets/english/about_time.wav";
+	string pathMusic="assets/english/hey.mp3";
+	TheSoundManager::Instance()->load(pathSFX,"ehy",SOUND_SFX);
+	TheSoundManager::Instance()->load(pathMusic,"ehy",SOUND_MUSIC);
+	TheSoundManager::Instance()->playSound("ehy",1);
+	TheSoundManager::Instance()->playMusic("ehy",1);
 
 	cout << "Enter player 1" << endl;
 	string name1;
@@ -79,9 +95,9 @@ int main() {
 	cin >> name2;
 	cout<< "hi "+ name2<<endl;
 	int board[3][3] = {
-	   {0, 0, 0} ,   /*  initializers for row indexed by 0 */
-	   {0, 0, 0} ,   /*  initializers for row indexed by 1 */
-	   {0, 0, 0}   /*  initializers for row indexed by 2 */
+	   {0, 0, 0} ,
+	   {0, 0, 0} ,
+	   {0, 0, 0}
 	};
 	int playersTurn=1;
 	while(true)
