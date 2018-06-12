@@ -74,12 +74,40 @@ void winning(int board[3][3], int player, string name)
 	}
 
 }
+void menu()
+{
+	TheSoundManager::Instance()->playMusic("Start",1);
+	std::this_thread::sleep_for (std::chrono::seconds(4));
+	TheSoundManager::Instance()->playMusic("Indstillinger",1);
+	std::this_thread::sleep_for (std::chrono::seconds(4));
+	TheSoundManager::Instance()->playMusic("Afslut",1);
+	cout << "Enter 1-3" << endl;
+	int menuIn=-1;
+	cin >> menuIn;
+	if(menuIn==1)
+	{
+
+		cout<<" the game will start"<<endl;
+	}
+	else if(menuIn==2)
+	{
+		cout<<"Indstillinger has yet to be implemented. Try again"<<endl;
+		menu();
+	}
+	else if(menuIn== 3)
+	{
+		cout<<"exit the game"<<endl;
+		exit(0);
+	}
+
+}
 int main() {
 	if( SDL_Init(SDL_INIT_EVERYTHING) < 0 )
 	    {
 	        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
 	        exit(0);
 	    }
+
 	string pathSFX="assets/Lydfiler//Start et nyt spil.mp3";
 	TheSoundManager::Instance()->load(pathSFX,"Start",SOUND_MUSIC);
 
@@ -87,11 +115,8 @@ int main() {
 	TheSoundManager::Instance()->load(pathSFX,"Afslut",SOUND_MUSIC);
 	pathSFX="assets/Lydfiler/Indstillinger.mp3";
 	TheSoundManager::Instance()->load(pathSFX,"Indstillinger",SOUND_MUSIC);
-	TheSoundManager::Instance()->playMusic("Start",1);
-	 std::this_thread::sleep_for (std::chrono::seconds(4));
-	 TheSoundManager::Instance()->playMusic("Indstillinger",1);
-	 std::this_thread::sleep_for (std::chrono::seconds(4));
-		 TheSoundManager::Instance()->playMusic("Afslut",1);
+
+	 menu();
 	cout << "Enter player 1" << endl;
 	string name1;
 	cin >> name1;
