@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include "SoundManager.h"
 #include <thread>
+#include <chrono>         // std::chrono::seconds
 using namespace std;
 
 
@@ -79,13 +80,18 @@ int main() {
 	        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
 	        exit(0);
 	    }
-	string pathSFX="assets/english/about_time.wav";
-	string pathMusic="assets/english/hey.mp3";
-	TheSoundManager::Instance()->load(pathSFX,"ehy",SOUND_SFX);
-	TheSoundManager::Instance()->load(pathMusic,"ehy",SOUND_MUSIC);
-	TheSoundManager::Instance()->playSound("ehy",1);
-	TheSoundManager::Instance()->playMusic("ehy",1);
+	string pathSFX="assets/Lydfiler//Start et nyt spil.mp3";
+	TheSoundManager::Instance()->load(pathSFX,"Start",SOUND_MUSIC);
 
+	pathSFX="assets/Lydfiler/Afslut.mp3";
+	TheSoundManager::Instance()->load(pathSFX,"Afslut",SOUND_MUSIC);
+	pathSFX="assets/Lydfiler/Indstillinger.mp3";
+	TheSoundManager::Instance()->load(pathSFX,"Indstillinger",SOUND_MUSIC);
+	TheSoundManager::Instance()->playMusic("Start",1);
+	 std::this_thread::sleep_for (std::chrono::seconds(4));
+	 TheSoundManager::Instance()->playMusic("Indstillinger",1);
+	 std::this_thread::sleep_for (std::chrono::seconds(4));
+		 TheSoundManager::Instance()->playMusic("Afslut",1);
 	cout << "Enter player 1" << endl;
 	string name1;
 	cin >> name1;
