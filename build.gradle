@@ -17,7 +17,7 @@ model {
         all {
             
             if (toolChain in Gcc) {
-                cppCompiler.args "-I/usr/include/SDL2/", "-I/usr/include"
+                cppCompiler.args "-std=c++11", "-std=gnu++11", "-I/usr/include/SDL2/", "-I/usr/include" 
 				linker.args "-lSDL2main", "-lSDL2", "-lSDL2_image","-ltinyxml2", "-lSDL2_mixer"
             }
         }
