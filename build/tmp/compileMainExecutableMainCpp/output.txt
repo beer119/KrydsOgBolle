@@ -1,0 +1,38 @@
+See file:///home/beer/KrydsOgBolle/build/tmp/compileMainExecutableMainCpp/output.txt for all output for compileMainExecutableMainCpp.
+compiling MenuState.cpp successful.
+
+compiling GameStateMachine.h successful.
+
+compiling MainMenuState.h successful.
+
+compiling MenuState.h successful.
+
+compiling GameState.h successful.
+
+compiling GameStateMachine.cpp successful.
+
+compiling PlayState.h successful.
+
+compiling PlayState.cpp successful.
+
+compiling GameOverState.h successful.
+
+compiling MainMenuState.cpp successful.
+
+compiling GameOverState.cpp successful.
+
+compiling InputHandler.h successful.
+
+compiling Game.h successful.
+
+compiling PauseState.h successful.
+
+compiling PauseState.cpp successful.
+
+compiling InputHandler.cpp successful.
+
+compiling Game.cpp successful.
+
+compiling KrydsOgBolle.cpp successful.
+
+Finished compileMainExecutableMainCpp, see full log file:///home/beer/KrydsOgBolle/build/tmp/compileMainExecutableMainCpp/output.txt.
