@@ -39,13 +39,13 @@ void MainMenuState::update()
 	}
 	if(TheInputHandler::Instance()->isPressed(SDLK_UP))
 	{
-		menuSelect++;
+		menuSelect--;
 		cout<<menuSelect<<endl;
 		changed=true;
 	}
 	if(TheInputHandler::Instance()->isPressed(SDLK_DOWN))
 	{
-		menuSelect--;
+		menuSelect++;
 		cout<<menuSelect<<endl;
 		changed=true;
 	}
