@@ -29,6 +29,7 @@ bool InputHandler::isPressed(SDL_Keycode key)
 {
 	if(event.type==SDL_KEYDOWN)
 	{
+		cout<<event.key.keysym.sym<<" "<<key<<endl;
 		if(event.key.keysym.sym==key&&event.key.keysym.sym!=0)
 		{
 			event.key.keysym.sym=0;

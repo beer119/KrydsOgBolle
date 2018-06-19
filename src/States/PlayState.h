@@ -16,6 +16,7 @@ class PlayState : public GameState
 public:
 
 virtual void update();
+void playfield(int row, int column);
 virtual void render();
 virtual bool onEnter();
 virtual bool onExit();
