@@ -21,6 +21,7 @@ virtual void render();
 virtual bool onEnter();
 virtual bool onExit();
 virtual std::string getStateID() const { return s_playID; }
+void winning(int player);
 private:
 static const std::string s_playID;
 

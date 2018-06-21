@@ -28,28 +28,94 @@ int board[3][3] = {
 	   {0, 0, 0} ,
 	   {0, 0, 0}
 	};
+
+void PlayState::winning(int player)
+{
+	for (int i=0;i<3;i++)
+		{
+
+				if( board[i][0]==player&& board[i][1]==player&& board[i][2]==player)
+					{
+						TheSoundManager::Instance()->playMusic("vundet"+to_string(player),1);
+						cout<<player<<" winds"<<endl;
+						using namespace std::this_thread; // sleep_for, sleep_until
+										using namespace std::chrono;
+										sleep_for(nanoseconds(1));
+										sleep_until(system_clock::now() + seconds(4));
+						exit(0);
+
+					}
+
+
+		}
+
+			for (int j=0;j<3;j++)
+				{
+				if( board[0][j]==player&& board[1][j]==player&& board[2][j]==player)
+					{
+
+
+					TheSoundManager::Instance()->playMusic("vundet"+to_string(player),1);
+											cout<<player<<" winds"<<endl;
+											using namespace std::this_thread; // sleep_for, sleep_until
+						using namespace std::chrono;
+						sleep_for(nanoseconds(1));
+						sleep_until(system_clock::now() + seconds(4));
+						exit(0);
+
+					}
+				}
+
+
+	bool found0=false;
+	for (int i=0;i<3;i++)
+			{
+				for (int j=0;j<3;j++)
+					{
+					if( board[i][j]==0)
+						{
+						found0=true;
+
+						}
+					}
+
+			}
+
+	if(found0==false)
+	{
+		cout<<"no more roome"<<endl;
+		exit(0);
+	}
+
+}
 void PlayState::playfield(int row, int column)
 {
+
+	if( board[row-1][column-1]==1)
+		{
+			TheSoundManager::Instance()->playMusic("optaget1",1);
+			using namespace std::this_thread; // sleep_for, sleep_until
+					using namespace std::chrono;
+					sleep_for(nanoseconds(1));
+					sleep_until(system_clock::now() + seconds(4));
+		}
+		if( board[row-1][column-1]==2)
+			{
+				TheSoundManager::Instance()->playMusic("optaget2",1);
+				using namespace std::this_thread; // sleep_for, sleep_until
+						using namespace std::chrono;
+						sleep_for(nanoseconds(1));
+						sleep_until(system_clock::now() + seconds(4));
+			}
 
 	string rowtxt = to_string(row);
 	string columntxt = to_string(column);
 	TheSoundManager::Instance()->playMusic(rowtxt+columntxt,1);
+
 }
 void PlayState::update()
 {
-	if(TheInputHandler::Instance()->isPressed(SDLK_SPACE)||TheInputHandler::Instance()->isPressed(SDLK_RETURN))
-	{
-	if(playersTurn==1)
-	{
-		TheSoundManager::Instance()->playMusic("spiller 2s tur",1);
-		playersTurn=2;
-	}
-	else if(playersTurn==2)
-		{
-		TheSoundManager::Instance()->playMusic("spiller 1s tur",1);
-		playersTurn=1;
-		}
-	}
+
 	std::cout << "on update"<< playersTurn<<"\n";
 	int Row=1;
 	int Colums=1;
@@ -57,6 +123,28 @@ void PlayState::update()
 	{
 
 		TheInputHandler::Instance()->update();
+		if(TheInputHandler::Instance()->isPressed(SDLK_SPACE)||TheInputHandler::Instance()->isPressed(SDLK_RETURN))
+			{
+				if(board[Row-1][Colums-1]==0)
+									{
+										board[Row-1][Colums-1]=playersTurn;
+										cout<<"taget "<<playersTurn<<endl;
+									}
+				else
+				{
+					cout<<"noy taget "<<playersTurn<<endl;
+				}
+			if(playersTurn==1)
+			{
+				TheSoundManager::Instance()->playMusic("spiller 2s tur",1);
+				playersTurn=2;
+			}
+			else if(playersTurn==2)
+				{
+				TheSoundManager::Instance()->playMusic("spiller 1s tur",1);
+				playersTurn=1;
+				}
+			}
 		if(TheInputHandler::Instance()->isPressed(SDLK_UP))
 			{
 				if(Row==1)
@@ -125,6 +213,7 @@ void PlayState::update()
 				}
 
 
+				winning(playersTurn);
 	}
 
 }
@@ -163,6 +252,19 @@ bool PlayState::onEnter()
 
 	pathSFX="assets/Lydfiler/spil/spiller 2s tur.mp3";
 	TheSoundManager::Instance()->load(pathSFX,"spiller 2s tur",SOUND_MUSIC);
+
+
+
+	pathSFX="assets/Lydfiler/spil/felt-optaget-af-spiller-1.mp3";
+	TheSoundManager::Instance()->load(pathSFX,"optaget1",SOUND_MUSIC);
+	pathSFX="assets/Lydfiler/spil/felt-optaget-af-spiller-2.mp3";
+	TheSoundManager::Instance()->load(pathSFX,"optaget2",SOUND_MUSIC);
+
+	pathSFX="assets/Lydfiler/spil/spiller-1-vinduer.mp3";
+	TheSoundManager::Instance()->load(pathSFX,"vundet1",SOUND_MUSIC);
+	pathSFX="assets/Lydfiler/spil/spiller-2-vinduer.mp3";
+	TheSoundManager::Instance()->load(pathSFX,"vundet2",SOUND_MUSIC);
+
 	TheSoundManager::Instance()->playMusic("spiller 1s tur",1);
 	std::cout << "on enter PlayState\n";
 	return true;
